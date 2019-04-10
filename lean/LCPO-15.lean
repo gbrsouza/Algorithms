@@ -2,14 +2,13 @@
 variable α : Type 
 variables R S : α → Prop 
 
-example : ∀x, (R(x)→ S(x)) →  (∀y, R(y) → ∀z, S(z)) :=
-assume h1 : ∀x, (R(x)→ S(x)),
-    show ∀y, R(y) → ∀z, S(z), from (
-        assume h2 : ∀y, R(y),
-        show ∀z, S(z), from (
-            assume x : α,
-            have p1 : R(x), from h2 (x),
-            have p2 : R(x) → S(x), from h1 (x),
-            have p3 : S(x), from p2 p1
-        )
+example (h1 : (∀x : α ,(R(x) → S(x)))) : (∀y: α ,R(y)) → (∀z : α ,S(z)) :=
+assume h2: (∀y: α ,R(y)),
+    show (∀z : α ,S(z)), from(
+        assume x : α,
+        show S(x), from (
+            have p1 : (R(x) → S(x)), from h1 x,
+            have p2 : (R(x)), from h2 x,
+            p1 p2
+        )  
     )
