@@ -1,0 +1,3 @@
+namespace euclidianGeo
+
+end euclidianGeo
