@@ -16,3 +16,15 @@ variables x y z : U
 example : x + (y + z) = x + (z + y) := 
 calc
     x + (y + z) = x + (z + y) : eq.subst (com y z) rfl
+
+example : ∃y:U, ∀w:U, ((∀x:U, (x+w=x)) ↔ w=y) :=
+    have h : (∀w:U, ((∀x:U, (x+w=x)) ↔ w=e)), from (
+        assume w : U,
+        show ((∀x:U, (x+w=x)) ↔ w=e), from (
+            iff.intro 
+            (assume m : ∀x, (x+w=x), 
+                show w=e, from sorry)
+            (assume n : w=e, 
+                show ∀x:U, (x+w=x), from sorry )
+        )
+    ),exists.intro e h
