@@ -1,7 +1,8 @@
+import init.logic 
 
-variable U : Type
-variables e : U 
-variable dot : U → U → U 
+constant U : Type
+constant e : U 
+constant dot : U → U → U 
 
 local infix `+` := dot 
 
@@ -12,4 +13,6 @@ axiom com : ∀ a b : U, (a + b) = (b + a)  -- commutativity
 
 variables x y z : U
 
-example : x + (y + z) = x + (z + y) := sorry
+example : x + (y + z) = x + (z + y) := 
+calc
+    x + (y + z) = x + (z + y) : eq.subst (com y z) rfl
