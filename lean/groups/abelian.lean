@@ -1,4 +1,5 @@
 import init.logic 
+import init.classical
 
 constant U : Type
 constant e : U 
@@ -7,7 +8,7 @@ constant dot : U → U → U
 local infix `+` := dot 
 
 axiom ass : ∀ a b c : U, (a + b) + c = a + (b + c) -- associativity  
-axiom iden : ∃e : U, ∀a : U, ((e + a) = a) ∧ ((a + e) = a) -- identity
+axiom iden : ∀a : U, ((e + a) = a) ∧ ((a + e) = a) -- identity
 axiom inv : ∀a : U, ∃b : U, ((a + b) = e) ∧ ((b + a) = e)  -- inverse
 axiom com : ∀ a b : U, (a + b) = (b + a)  -- commutativity
 
@@ -22,9 +23,13 @@ example : ∃y:U, ∀w:U, ((∀x:U, (x+w=x)) ↔ w=y) :=
         assume w : U,
         show ((∀x:U, (x+w=x)) ↔ w=e), from (
             iff.intro 
-            (assume m : ∀x, (x+w=x), 
-                show w=e, from sorry)
+            (assume m : ∀x, (x+w=x),
+                have h1 : e + w = e, from m e,
+                have h2 : w = e + w, from eq.symm( and.left (iden w) ),
+                show w=e, from eq.subst h1 h2)
             (assume n : w=e, 
-                show ∀x:U, (x+w=x), from sorry )
+                have h3 : e + w = e, from eq.subst n and.left(iden w),
+                assume x,
+                show ∀x, (x+w=x), from h3 x)
         )
     ),exists.intro e h
