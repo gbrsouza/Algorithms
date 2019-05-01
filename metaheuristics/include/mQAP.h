@@ -12,15 +12,17 @@
  * @copyright Copyright (c) 2019
  */
 
-#include <memory> //<! std::unique_ptr
+#include <memory> //<! std::shared_ptr
 #include <vector> //<! std::vector
 #include <string> //<! std::string
+
+#include "solutions/qapSolution.h"
 
 /**
  * @brief represents a matrix for the problem.
  */
 typedef struct Matrix {
-    std::shared_ptr<std::shared_ptr<int>> matrix; 
+    std::shared_ptr<QAPSolution> matrix; 
 }Matrix;
 
 /**
@@ -33,7 +35,7 @@ private:
     
     int numberOfObjectives;            //<! number of objectives    
     int dimension;                     //<! dimension problem (number of facilities/locations)
-    std::shared_ptr<int> bestSolution; //<! the best solution for the problem
+    QAPSolution bestSolution; //<! the best solution for the problem
     std::vector<Matrix> flowMatrices;  //<! all flow matrices
     Matrix distanceMatrix;             //<! The distance matrix of problem
     std::string problemName;           //<! The problem name
@@ -55,7 +57,7 @@ public:
      * @param distanceMatrix       the distance matrix for the problem
      */
     mQAP(int numberOfObjectives, int dimension,
-         std::shared_ptr<int> bestSolution,
+         QAPSolution bestSolution,
          std::vector<Matrix> flowMatrices,
          Matrix distanceMatrix)
 
@@ -78,7 +80,7 @@ public:
      * @param name                 the instance name
      */
     mQAP(int numberOfObjectives, int dimension,
-         std::shared_ptr<int> bestSolution,
+         QAPSolution bestSolution,
          std::vector<Matrix> flowMatrices,
          Matrix distanceMatrix, std::string name)
 
@@ -90,10 +92,6 @@ public:
            problemName{name}
          
         {}
-
-
-
-           
 
 };
 
