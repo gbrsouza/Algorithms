@@ -8,14 +8,16 @@ variables e  : α
 -- define the relation
 variable dot : α → α → α 
 
+local infix `*` := dot
+
 -- axioms
 -- associativity
-axiom ass : ∀ a b c : α, dot (dot a b ) c = dot a (dot b c)  
+axiom ass : ∀ a b c : α, (a * b) * c = a * (b * c)  
 
 -- identity
-axiom iden : ∃e : α, ∀a : α, (dot e a = a ∧ dot a e = a)
+axiom iden : ∃e : α, ∀a : α, e * a = a ∧ a * e = a
 
 -- inverse
-axiom inv : ∀a : α, ∃b : α, ( dot a b = e ∧ dot b a = e)
+axiom inv : ∀a : α, ∃b : α, a * b = e ∧ b * a = e
 
 end groups
