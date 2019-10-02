@@ -2,10 +2,10 @@ namespace groups
 
 variable α : Type
 
--- define the neutral  elements
+-- define the neutral element
 variables e  : α 
 
--- define the relation
+-- define the group operation
 variable dot : α → α → α 
 
 local infix `*` := dot
