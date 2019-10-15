@@ -5,6 +5,9 @@ using namespace std;
 
 int main ( ){
 
-    reader::read("/home/gabriel/Códigos/Algorithms/metaheuristics/mqap/instances/Knowles/KC10-2fl-1rl.dat");
+    auto p = reader::read("instances/Knowles/KC10-2fl-1rl.dat");
+    p.print_distance_matrix();
+    cout << endl;
+    p.print_flow_matrices();
     return 0;
 }

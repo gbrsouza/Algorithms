@@ -12,17 +12,42 @@ mqap reader::read (string filename){
     // get first line 
     string tmp;
     int facilities, objectives;
-    int** distance_matrix;
+
+    getline(file, tmp);
+    istringstream iss(tmp);
+
+    iss >> tmp >> tmp;
+    iss >> facilities;
+
+    iss >> tmp >> tmp;
+    iss >> objectives;
+
+    // create distance matrix
+    int** distance_matrix = new int*[facilities];
+    for (int i=0; i < facilities; i++)
+        distance_matrix[i] = new int[facilities];
+
+    // read distance matrix
+    for (int i=0; i < facilities; i++)
+        for(int j=0; j < facilities; j++)
+            file >> distance_matrix[i][j];
+
+    //create all flow matrices
     vector<int**> flow_matrices;
+    for (int i=0; i < objectives; i++){
+        int** flow_matrix = new int*[facilities];
+        for (int j=0; j < facilities; j++)
+            flow_matrix[j] = new int[facilities];
+        flow_matrices.push_back(flow_matrix);
+    }
 
-    file >> tmp >> tmp;
-    file >> facilities;
-
-    file >> tmp >> tmp;
-    file >> objectives;
-
-    cout << "facilities: " << facilities << " " << "objectives: " << objectives << endl;
+    // read all flow matrices
+    for (int i=0; i < objectives; i++){
+        for (int j=0; j < facilities; j++)
+            for (int k=0; k < facilities; k++)
+                file >> flow_matrices[i][j][k];
+    }
 
     file.close();
-    return mqap{};
+    return mqap{objectives, facilities, flow_matrices, distance_matrix};
 }

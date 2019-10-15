@@ -2,8 +2,9 @@
 #define _MQAP_H_
 
 #include <vector>
-using std::vector;
+#include <iostream>
 
+using namespace std;
 class mqap {
 
 private:
@@ -37,7 +38,7 @@ public:
      */
     mqap (
         int num_objectives, int instance_size, 
-        vector<int**> flow_matrix, int** distance_matrix
+        vector<int**> &flow_matrices, int** distance_matrix
     );
 
     mqap () {}
@@ -57,6 +58,9 @@ public:
 
     int get_instance_size ();
     int get_num_objectives ();
+
+    void print_flow_matrices ();
+    void print_distance_matrix ();
 };
 
 #endif
