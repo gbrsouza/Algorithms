@@ -35,7 +35,7 @@ private:
     
     int numberOfObjectives;            //<! number of objectives    
     int dimension;                     //<! dimension problem (number of facilities/locations)
-    QAPSolution bestSolution; //<! the best solution for the problem
+    QAPSolution bestSolution;          //<! the best solution for the problem
     std::vector<Matrix> flowMatrices;  //<! all flow matrices
     Matrix distanceMatrix;             //<! The distance matrix of problem
     std::string problemName;           //<! The problem name

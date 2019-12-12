@@ -48,6 +48,29 @@ public:
      */
     ~mqap ();
 
+    /**
+     * @brief calcule the distance cost of i in j for a 
+     * objective.
+     * 
+     * @param i   the facility 
+     * @param j   the location
+     * @param obj the objective 
+     * @return int return the distance cost
+     */
+    int flow_cost (int i, int j, int obj);
+
+    /**
+     * @brief calculate a cost of a preview solution 
+     * 
+     * @param solution the preview solution
+     * @param obj      the objective for calculate cost
+     * @param size     the size of preview solution
+     * @return int     
+     */
+    int cost_preview_solution (int* solution, int size, int obj);
+
+    int solution_cost (int* solution);
+
     void set_actual_solution (int* new_solution);
     int* get_actual_solution ();
 
